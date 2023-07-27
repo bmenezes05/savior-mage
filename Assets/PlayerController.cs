@@ -8,14 +8,18 @@ public class PlayerController : MonoBehaviour
     public float collisionOffset = 0.05f;
     public ContactFilter2D movementFilter;
 
-    private Vector2 movementInput;
-    private Rigidbody2D rb;
-    private List<RaycastHit2D> castCollisions = new List<RaycastHit2D>();
+    Vector2 movementInput;
+    Rigidbody2D rb;
+    Animator animator;
+    SpriteRenderer spriteRenderer;
+    List<RaycastHit2D> castCollisions = new List<RaycastHit2D>();
 
     // Start is called before the first frame update
     private void Start()
     {
         rb = GetComponent<Rigidbody2D>();
+        animator = GetComponent<Animator>();
+        spriteRenderer = GetComponent<SpriteRenderer>();
     }
 
     // Update is called once per frame
@@ -39,22 +43,45 @@ public class PlayerController : MonoBehaviour
                     success = TryMove(new Vector2(0, movementInput.y));
                 }
             }
+
+            animator.SetBool("IsMoving", success);
+        }
+        else
+        {
+            animator.SetBool("IsMoving", false);
+        }
+
+        //Set direction of sprite
+        if (movementInput.x < 0)
+        {
+            spriteRenderer.flipX = true;
+        } 
+        else
+        {
+            spriteRenderer.flipX = false;
         }
     }
 
     private bool TryMove(Vector2 direction)
     {
-        int count = rb.Cast(
-            direction,
-            movementFilter,
-            castCollisions,
-            moveSpeed * Time.fixedDeltaTime + collisionOffset);
-
-        if (count == 0)
+        if (direction != Vector2.zero)
         {
-            rb.MovePosition(rb.position + direction * moveSpeed * Time.fixedDeltaTime);
-            return true;
-        } 
+            int count = rb.Cast(
+                direction,
+                movementFilter,
+                castCollisions,
+                moveSpeed * Time.fixedDeltaTime + collisionOffset);
+
+            if (count == 0)
+            {
+                rb.MovePosition(rb.position + direction * moveSpeed * Time.fixedDeltaTime);
+                return true;
+            }
+            else
+            {
+                return false;
+            }
+        }
         else
         {
             return false;
