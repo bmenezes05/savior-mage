@@ -14,6 +14,8 @@ public class PlayerController : MonoBehaviour
     SpriteRenderer spriteRenderer;
     List<RaycastHit2D> castCollisions = new List<RaycastHit2D>();
 
+    public AttackController attack;
+
     // Start is called before the first frame update
     private void Start()
     {
@@ -54,11 +56,11 @@ public class PlayerController : MonoBehaviour
         //Set direction of sprite
         if (movementInput.x < 0)
         {
-            spriteRenderer.flipX = true;
-        } 
+            spriteRenderer.flipX = true;            
+        }
         else
         {
-            spriteRenderer.flipX = false;
+            spriteRenderer.flipX = false;            
         }
     }
 
@@ -88,8 +90,30 @@ public class PlayerController : MonoBehaviour
         }
     }
 
-    private void OnMove(InputValue movementValue)
+    void OnMove(InputValue movementValue)
     {
         movementInput = movementValue.Get<Vector2>();
+    }
+
+    void OnFire()
+    {
+        animator.SetTrigger("Attack");
+    }
+
+    public void Attack()
+    {
+        if (spriteRenderer.flipX == true)
+        {
+            attack.AttackLeft();
+        }
+        else
+        {
+            attack.AttackRight();
+        }
+    }
+
+    public void EndAttack()
+    {
+        attack.StopAttack();
     }
 }
