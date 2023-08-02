@@ -12,8 +12,9 @@ GameObject:
   - component: {fileID: 6170034653342223193}
   - component: {fileID: 3477329323471051496}
   - component: {fileID: 8505806038816220113}
-  - component: {fileID: 5007391630097264142}
   - component: {fileID: 6727954357518746071}
+  - component: {fileID: 5007391630097264142}
+  - component: {fileID: 6419987776362505891}
   m_Layer: 0
   m_Name: Enemy
   m_TagString: Enemy
@@ -120,22 +121,9 @@ CapsuleCollider2D:
   m_IsTrigger: 1
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: -0.0014273524, y: -0.007136829}
-  m_Size: {x: 0.1457938, y: 0.22572634}
+  m_Offset: {x: 0.0017111301, y: -0.0110599175}
+  m_Size: {x: 0.11754727, y: 0.1944405}
   m_Direction: 0
---- !u!114 &5007391630097264142
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 172269624362829219}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 0da01b293924a29429101d61ed454690, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  health: 1
 --- !u!95 &6727954357518746071
 Animator:
   serializedVersion: 3
@@ -155,3 +143,33 @@ Animator:
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorControllerStateOnDisable: 0
+--- !u!114 &5007391630097264142
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 172269624362829219}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0da01b293924a29429101d61ed454690, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  enemySpawner: {fileID: 0}
+  target: {fileID: 0}
+  obstaclesTilemap: {fileID: 0}
+  moveSpeed: 0.5
+  health: 1
+--- !u!114 &6419987776362505891
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 172269624362829219}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 453419af2a6814045881ee471cc64c14, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  damageAmount: 10
